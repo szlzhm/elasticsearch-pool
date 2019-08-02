@@ -15,7 +15,7 @@ import com.majing.learning.elasticsearch.exception.ElasticSearchException;
  * @date : 2018/7/20
  * @description
  */
-public class Pool<T> implements Closeable {
+public class Pool<T> implements Cloneable {
 
     protected GenericObjectPool<T> internalPool ;
 
