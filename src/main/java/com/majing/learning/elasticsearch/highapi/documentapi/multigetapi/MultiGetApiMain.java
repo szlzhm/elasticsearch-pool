@@ -9,6 +9,7 @@ import org.elasticsearch.action.get.MultiGetRequest;
 import org.elasticsearch.action.get.MultiGetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.update.UpdateRequest;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 
@@ -31,7 +32,7 @@ public class MultiGetApiMain {
             multiGetRequest.add(new MultiGetRequest.Item("jingma2_20180716","testlog","2"));
             multiGetRequest.add(new MultiGetRequest.Item("jingma2_20180716","testlog","3"));
 
-            MultiGetResponse multiGetResponse = client.multiGet(multiGetRequest);
+            MultiGetResponse multiGetResponse = client.multiGet(multiGetRequest,RequestOptions.DEFAULT);
             MultiGetItemResponse[] itemResponses = multiGetResponse.getResponses();
             for(int i=0;i<itemResponses.length;i++){
                 System.out.println(itemResponses[i].getResponse());

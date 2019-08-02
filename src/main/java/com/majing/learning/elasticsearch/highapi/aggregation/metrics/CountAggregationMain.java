@@ -1,22 +1,22 @@
 package com.majing.learning.elasticsearch.highapi.aggregation.metrics;
 
-import com.majing.learning.elasticsearch.highapi.HighLevelClient;
+import java.io.IOException;
+import java.util.Map;
+
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.metrics.percentiles.PercentileRanksAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.sum.ParsedSum;
-import org.elasticsearch.search.aggregations.metrics.valuecount.ParsedValueCount;
-import org.elasticsearch.search.aggregations.metrics.valuecount.ValueCountAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.ParsedValueCount;
+import org.elasticsearch.search.aggregations.metrics.ValueCountAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import java.io.IOException;
-import java.util.Map;
+import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 
 /**
  * @author:admin
@@ -40,7 +40,7 @@ public class CountAggregationMain {
             searchSourceBuilder.size(0);//不返回具体业务数据，只需要聚合结果
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
             //统计结果

@@ -5,6 +5,7 @@ import org.elasticsearch.action.search.MultiSearchRequest;
 import org.elasticsearch.action.search.MultiSearchResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -43,7 +44,7 @@ public class MultiSearchApiMain {
             secondSearchRequest.source(searchSourceBuilder);
             request.add(secondSearchRequest);
 
-            MultiSearchResponse response = client.multiSearch(request);
+            MultiSearchResponse response = client.multiSearch(request,RequestOptions.DEFAULT);
 
             MultiSearchResponse.Item firstResponse = response.getResponses()[0];
             SearchResponse searchResponse = firstResponse.getResponse();

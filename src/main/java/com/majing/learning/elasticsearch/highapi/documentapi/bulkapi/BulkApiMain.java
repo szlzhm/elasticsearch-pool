@@ -7,6 +7,7 @@ import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 
@@ -30,7 +31,7 @@ public class BulkApiMain {
             bulkRequest.add(new DeleteRequest("jingma2_20180716", "testlog", "1"));
             bulkRequest.add(new UpdateRequest("jingma2_20180716", "testlog", "2").doc(XContentType.JSON,"name","马靖2"));
 
-            BulkResponse bulkResponse = client.bulk(bulkRequest);
+            BulkResponse bulkResponse = client.bulk(bulkRequest,RequestOptions.DEFAULT);
             System.out.println(bulkResponse);
 
         }finally{

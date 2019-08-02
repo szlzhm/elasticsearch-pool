@@ -1,13 +1,16 @@
 package com.majing.learning.elasticsearch.client;
 
-import com.majing.learning.elasticsearch.exception.ElasticSearchException;
-import com.majing.learning.elasticsearch.pool.ElasticSearchConnectionManager;
-import com.majing.learning.elasticsearch.pool.ElasticSearchPool;
 import org.apache.http.Header;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.main.MainResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.core.MainResponse;
+
+import com.majing.learning.elasticsearch.exception.ElasticSearchException;
+import com.majing.learning.elasticsearch.pool.ElasticSearchConnectionManager;
+import com.majing.learning.elasticsearch.pool.ElasticSearchPool;
+
 
 /**
  * @author : jingma2
@@ -26,7 +29,7 @@ public class ElasticSearchClient {
         RestHighLevelClient client = null;
         try{
             client = getResource();
-            boolean result = client.ping();
+            boolean result = client.ping(RequestOptions.DEFAULT);
             returnResource(client);
             return result;
         }catch(Exception e){
@@ -39,7 +42,7 @@ public class ElasticSearchClient {
         RestHighLevelClient client = null;
         try{
             client = getResource();
-            MainResponse result = client.info();
+            org.elasticsearch.client.core.MainResponse result = client.info(RequestOptions.DEFAULT);
             returnResource(client);
             return result;
         }catch(Exception e){
@@ -48,11 +51,11 @@ public class ElasticSearchClient {
         }
     }
 
-    public boolean exists(GetRequest getRequest, Header... headers){
+    public boolean exists(GetRequest getRequest, RequestOptions options){
         RestHighLevelClient client = null;
         try{
             client = getResource();
-            boolean result = client.exists(getRequest,headers);
+            boolean result = client.exists(getRequest,options);
             returnResource(client);
             return result;
         }catch(Exception e){
@@ -61,11 +64,11 @@ public class ElasticSearchClient {
         }
     }
 
-    public GetResponse get(GetRequest getRequest, Header... headers){
+    public GetResponse get(GetRequest getRequest, RequestOptions options){
         RestHighLevelClient client = null;
         try{
             client = getResource();
-            GetResponse result = client.get(getRequest,headers);
+            GetResponse result = client.get(getRequest,options);
             returnResource(client);
             return result;
         }catch(Exception e){

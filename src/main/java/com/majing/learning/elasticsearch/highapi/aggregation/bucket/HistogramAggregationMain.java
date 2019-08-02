@@ -3,6 +3,7 @@ package com.majing.learning.elasticsearch.highapi.aggregation.bucket;
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.aggregations.*;
 import org.elasticsearch.search.aggregations.bucket.histogram.HistogramAggregationBuilder;
@@ -42,7 +43,7 @@ public class HistogramAggregationMain {
             searchSourceBuilder.aggregation(aggregationBuilder);
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
         }finally{

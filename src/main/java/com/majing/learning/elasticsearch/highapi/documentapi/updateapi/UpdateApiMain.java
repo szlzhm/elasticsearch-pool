@@ -4,6 +4,7 @@ import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.search.fetch.subphase.FetchSourceContext;
@@ -29,7 +30,7 @@ public class UpdateApiMain {
 //            updateRequest.upsert(buildIndexData());//没有文档时插入该文档
 //            updateRequest.upsert(jsonString, XContentType.JSON);
 
-            UpdateResponse updateResponse = client.update(updateRequest);
+            UpdateResponse updateResponse = client.update(updateRequest,RequestOptions.DEFAULT);
                     System.out.println(updateResponse);
         }finally{
             HighLevelClient.close();

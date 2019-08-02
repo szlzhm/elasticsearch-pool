@@ -3,6 +3,7 @@ package com.majing.learning.elasticsearch.highapi.aggregation.bucket;
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
@@ -28,7 +29,7 @@ public class DateRangeAggregationMain {
             dateRangeAggregationBuilder.field("ctm");
             dateRangeAggregationBuilder.format("yyyy-MM-dd HH:mm:ss");
             dateRangeAggregationBuilder.addRange("2018-07-10 00:00:00","2018-07-11 00:00:00");
-            dateRangeAggregationBuilder.timeZone(DateTimeZone.forOffsetHours(0));
+            //dateRangeAggregationBuilder.timeZone(ZoneId.));
 
             TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("cmd","weather_info");
 
@@ -40,7 +41,7 @@ public class DateRangeAggregationMain {
             searchSourceBuilder.aggregation(dateRangeAggregationBuilder);
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
         }finally{

@@ -4,6 +4,7 @@ import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.rest.RestStatus;
@@ -31,7 +32,7 @@ public class GetApiMain {
             getRequest.fetchSourceContext(fetchSourceContext);//用于设置查询返回的字段
 
             try {
-                GetResponse getResponse = client.get(getRequest);
+                GetResponse getResponse = client.get(getRequest,RequestOptions.DEFAULT);
                 System.out.println(getResponse.getSource());
             } catch (ElasticsearchException e) {
                 if (e.status() == RestStatus.NOT_FOUND) {

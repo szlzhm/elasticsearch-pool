@@ -2,6 +2,7 @@ package com.majing.learning.elasticsearch.highapi.documentapi.indexapi;
 
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class IndexApiMain {
             content.setLength(0);
             indexRequest.source(buildIndexData());
 
-            client.index(indexRequest);
+            client.index(indexRequest,RequestOptions.DEFAULT);
         }
 
         HighLevelClient.close();
@@ -55,7 +56,7 @@ public class IndexApiMain {
         indexRequest.source(buildIndexData());
 
         RestHighLevelClient client = HighLevelClient.getInstance();
-        client.index(indexRequest);
+        client.index(indexRequest,RequestOptions.DEFAULT);
         HighLevelClient.close();
     }
 

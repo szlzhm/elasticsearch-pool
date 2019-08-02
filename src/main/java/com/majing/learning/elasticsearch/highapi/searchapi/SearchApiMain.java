@@ -1,8 +1,11 @@
 package com.majing.learning.elasticsearch.highapi.searchapi;
 
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
+
+import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.unit.TimeValue;
@@ -61,11 +64,11 @@ public class SearchApiMain {
 
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
             SearchHits hits = searchResponse.getHits();
-            long totalHits = hits.getTotalHits();
+            TotalHits totalHits = hits.getTotalHits();
             float maxScore = hits.getMaxScore();
 
             SearchHit[] searchHits = hits.getHits();

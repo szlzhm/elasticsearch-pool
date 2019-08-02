@@ -3,6 +3,7 @@ package com.majing.learning.elasticsearch.highapi.queryapi.compound;
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -36,7 +37,7 @@ public class BoolApiMain {
             searchRequest.types("log");//限定type
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
 

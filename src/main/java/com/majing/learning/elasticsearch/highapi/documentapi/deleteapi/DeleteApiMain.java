@@ -5,6 +5,7 @@ import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 
@@ -23,7 +24,7 @@ public class DeleteApiMain {
 //            deleteRequest.version(2);//指定源文档版本，防止误删除
 //            deleteRequest.timeout(TimeValue.timeValueSeconds(5));//设置请求超时时间
 
-            DeleteResponse deleteResponse = client.delete(deleteRequest);
+            DeleteResponse deleteResponse = client.delete(deleteRequest,RequestOptions.DEFAULT);
             System.out.println(deleteResponse);
         }finally{
             HighLevelClient.close();

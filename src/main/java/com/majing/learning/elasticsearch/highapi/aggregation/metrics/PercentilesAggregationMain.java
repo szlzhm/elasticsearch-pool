@@ -1,17 +1,18 @@
 package com.majing.learning.elasticsearch.highapi.aggregation.metrics;
 
-import com.majing.learning.elasticsearch.highapi.HighLevelClient;
+import java.io.IOException;
+
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.metrics.percentiles.PercentilesAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.sum.SumAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.PercentilesAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import java.io.IOException;
+import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 
 /**
  * @author:admin
@@ -36,7 +37,7 @@ public class PercentilesAggregationMain {
             searchSourceBuilder.size(0);
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
         }finally{

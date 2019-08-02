@@ -3,6 +3,7 @@ package com.majing.learning.elasticsearch.highapi.aggregation.bucket;
 import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
@@ -30,7 +31,7 @@ public class DateHistogramAggregationMain {
             DateHistogramAggregationBuilder dateHistogramAggregationBuilder = AggregationBuilders.dateHistogram("ctm_date_histogram");
             dateHistogramAggregationBuilder.field("ctm");//设置直方图针对的字段
             dateHistogramAggregationBuilder.dateHistogramInterval(DateHistogramInterval.hours(6));//直方图每个分组对应的范围
-            dateHistogramAggregationBuilder.timeZone(DateTimeZone.forOffsetHours(8));//时区偏移
+            //dateHistogramAggregationBuilder.timeZone();//时区偏移
             dateHistogramAggregationBuilder.keyed(true);//是否需要key名
             dateHistogramAggregationBuilder.format("yyyy-MM-dd HH:mm");//key名格式
 //            dateHistogramAggregationBuilder.order(BucketOrder.aggregation("_key",true));//分组key的排序
@@ -47,7 +48,7 @@ public class DateHistogramAggregationMain {
             searchSourceBuilder.aggregation(dateHistogramAggregationBuilder);
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
         }finally{

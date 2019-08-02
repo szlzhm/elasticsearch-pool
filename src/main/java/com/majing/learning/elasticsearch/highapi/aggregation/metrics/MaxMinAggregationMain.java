@@ -1,22 +1,20 @@
 package com.majing.learning.elasticsearch.highapi.aggregation.metrics;
 
-import com.majing.learning.elasticsearch.highapi.HighLevelClient;
+import java.io.IOException;
+import java.util.Map;
+
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.metrics.avg.AvgAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.max.MaxAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.max.ParsedMax;
-import org.elasticsearch.search.aggregations.metrics.min.MinAggregationBuilder;
-import org.elasticsearch.search.aggregations.metrics.min.ParsedMin;
+import org.elasticsearch.search.aggregations.metrics.MinAggregationBuilder;
+import org.elasticsearch.search.aggregations.metrics.ParsedMin;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import com.majing.learning.elasticsearch.highapi.HighLevelClient;
 
 /**
  * @author:admin
@@ -38,7 +36,7 @@ public class MaxMinAggregationMain {
             searchSourceBuilder.size(0);//设置不需要文档数据，只需要返回聚合结果
             searchRequest.source(searchSourceBuilder);
 
-            SearchResponse searchResponse = client.search(searchRequest);
+            SearchResponse searchResponse = client.search(searchRequest,RequestOptions.DEFAULT);
             System.out.println(searchResponse);
 
             //统计结果
