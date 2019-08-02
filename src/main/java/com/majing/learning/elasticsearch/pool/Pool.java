@@ -1,19 +1,21 @@
 package com.majing.learning.elasticsearch.pool;
 
-import com.majing.learning.elasticsearch.exception.ElasticSearchConnectException;
-import com.majing.learning.elasticsearch.exception.ElasticSearchException;
+import java.io.Closeable;
+import java.io.IOException;
+
 import org.apache.commons.pool2.PooledObjectFactory;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-import java.util.NoSuchElementException;
+import com.majing.learning.elasticsearch.exception.ElasticSearchConnectException;
+import com.majing.learning.elasticsearch.exception.ElasticSearchException;
 
 /**
  * @author : jingma2
  * @date : 2018/7/20
  * @description
  */
-public class Pool<T> implements Cloneable {
+public class Pool<T> implements Cloneable,Closeable {
 
     protected GenericObjectPool<T> internalPool ;
 
@@ -143,4 +145,8 @@ public class Pool<T> implements Cloneable {
             throw new Exception("Error trying to add idle objects", e);
         }
     }
+
+	public void close() throws IOException {
+		this.destroy();		
+	}
 }
