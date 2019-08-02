@@ -15,7 +15,7 @@ import com.majing.learning.elasticsearch.exception.ElasticSearchException;
  * @date : 2018/7/20
  * @description
  */
-public class Pool<T> implements Cloneable,Closeable {
+public class Pool<T> implements Closeable {
 
     protected GenericObjectPool<T> internalPool ;
 
@@ -146,7 +146,5 @@ public class Pool<T> implements Cloneable,Closeable {
         }
     }
 
-	public void close() throws IOException {
-		this.destroy();		
-	}
+	
 }

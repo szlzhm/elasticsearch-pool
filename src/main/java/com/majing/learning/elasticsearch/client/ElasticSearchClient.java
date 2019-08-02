@@ -90,7 +90,7 @@ public class ElasticSearchClient {
         }
     }
 
-    public void returnResource(RestHighLevelClient client){
+    private void returnResource(RestHighLevelClient client){
         try{
             if(client!=null){
                 this.pool.returnResource(client);
@@ -100,7 +100,7 @@ public class ElasticSearchClient {
         }
     }
 
-    public void returnBrokenResource(RestHighLevelClient client){
+    private void returnBrokenResource(RestHighLevelClient client){
         pool.returnBrokenResource(client);
     }
 }
